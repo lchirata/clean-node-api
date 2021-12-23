@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist", //onde gera o arquivo js qnd estiver pronto (depois de compilado)
+        "module": "CommonJS",  
+        "target": "es2019", //utilzar padrão es2019 - verificar qual versão do node o servidor aceita
+        "esModuleInterop": true, 
+        "allowJs": true
+    }
+}
