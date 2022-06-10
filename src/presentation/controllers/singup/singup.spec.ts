@@ -96,7 +96,7 @@ describe('SingUp Controller', () => {
         expect(httpResponse.statusCode).toBe(400)
         expect(httpResponse.body).toEqual(new MissingParamError('passwordConfirmation'))
     })
-    test('hould return 400 if invalid email is provided', () => {
+    test('Should return 400 if invalid email is provided', () => {
         const { sut, emailValidatorStub } = makeSut()
         jest.spyOn(emailValidatorStub, 'isValid').mockReturnValueOnce(false) // utilizando jest para mocar retorno como false
         const httpRequest = {
@@ -191,6 +191,24 @@ describe('SingUp Controller', () => {
             email: 'any_email@mail.com',
             password: 'any_password',
         })
-    })    
+    }) 
+    test('Should return 500 if addAccount throws', () => {
+        const { sut, addAccountStub } = makeSut()
+        jest.spyOn(addAccountStub, 'add').mockImplementationOnce(() => {
+            throw Error()
+        })
+
+        const httpRequest = {
+            body: {
+                name: 'any_name',
+                email: 'invalid_email@mail.com',
+                password: 'any_password',
+                passwordConfirmation: 'any_password',
+            }
+        }
+        const httpResponse = sut.handle(httpRequest)
+        expect(httpResponse.statusCode).toBe(500)
+        expect(httpResponse.body).toEqual(new ServerError())
+    })
 })
 
