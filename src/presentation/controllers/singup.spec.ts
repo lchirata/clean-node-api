@@ -1,7 +1,5 @@
 import { SingUpController } from './singup'
-import { MissingParamError } from '../error/missing-params-error'
-import { InvalidParamError } from '../error/invalid-params-error'
-import { serverError } from '../error/server-error'
+import { MissingParamError, InvalidParamError, ServerError } from '../error'
 import { EmailValidator } from '../protocols/email-validator'
 
 interface SutTypes {
@@ -111,7 +109,7 @@ describe('SingUp Controller', () => {
     test('Should return 500 if email validator throws', () => {
         class EmailValidatorStub implements EmailValidator { //stub é um tipo de teste.
             isValid(email: string): boolean {
-            throw new Error()
+             throw new Error()
             }
         }
         const emailValidatorStub = new EmailValidatorStub()
@@ -126,7 +124,7 @@ describe('SingUp Controller', () => {
         }
         const httpResponse = sut.handle(httpRequest)
         expect(httpResponse.statusCode).toBe(500)
-        expect(httpResponse.body).toEqual(new serverError())
+        expect(httpResponse.body).toEqual(new ServerError())
     })
     
 })

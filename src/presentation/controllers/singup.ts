@@ -1,8 +1,7 @@
 import { httpResponse, httpRequest } from '../protocols/http'
-import { MissingParamError } from '../error/missing-params-error'
+import { MissingParamError, InvalidParamError } from '../error'
 import { badRequest, serverError } from '../helper/http-helper'
 import { EmailValidator } from '../protocols/email-validator'
-import { InvalidParamError } from '../error/invalid-params-error'
 
 export class SingUpController{
     private readonly emailValidator: EmailValidator
