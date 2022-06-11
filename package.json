@@ -15,8 +15,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/validator": "^13.7.3",
     "git-commit-msg-linter": "^3.2.8",
-    "ts-node": "^10.4.0"
+    "ts-node": "^10.4.0",
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "@types/jest": "^27.0.3",
